@@ -264,6 +264,10 @@ type EventsConfig struct {
 
 // CollectorResourceRequirements sets CPU and memory requests and limits for one
 // OpenTelemetryCollector workload.
+// +kubebuilder:validation:XValidation:rule="!has(self.requests) || !('cpu' in self.requests) || quantity(string(self.requests['cpu'])).compareTo(quantity('0')) >= 0",message="CPU request must be non-negative"
+// +kubebuilder:validation:XValidation:rule="!has(self.requests) || !('memory' in self.requests) || quantity(string(self.requests['memory'])).compareTo(quantity('0')) >= 0",message="memory request must be non-negative"
+// +kubebuilder:validation:XValidation:rule="!has(self.limits) || !('cpu' in self.limits) || quantity(string(self.limits['cpu'])).compareTo(quantity('0')) >= 0",message="CPU limit must be non-negative"
+// +kubebuilder:validation:XValidation:rule="!has(self.limits) || !('memory' in self.limits) || quantity(string(self.limits['memory'])).compareTo(quantity('0')) >= 0",message="memory limit must be non-negative"
 // +kubebuilder:validation:XValidation:rule="!has(self.requests) || !has(self.limits) || !('cpu' in self.requests) || !('cpu' in self.limits) || quantity(string(self.requests['cpu'])).compareTo(quantity(string(self.limits['cpu']))) <= 0",message="CPU request must be less than or equal to CPU limit"
 // +kubebuilder:validation:XValidation:rule="!has(self.requests) || !has(self.limits) || !('memory' in self.requests) || !('memory' in self.limits) || quantity(string(self.requests['memory'])).compareTo(quantity(string(self.limits['memory']))) <= 0",message="memory request must be less than or equal to memory limit"
 type CollectorResourceRequirements struct {

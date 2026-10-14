@@ -69,6 +69,21 @@ spec:
                         type: object
                     type: object
                     x-kubernetes-validations:
+                    - message: CPU request must be non-negative
+                      rule: '!has(self.requests) || !(''cpu'' in self.requests) ||
+                        quantity(string(self.requests[''cpu''])).compareTo(quantity(''0''))
+                        >= 0'
+                    - message: memory request must be non-negative
+                      rule: '!has(self.requests) || !(''memory'' in self.requests)
+                        || quantity(string(self.requests[''memory''])).compareTo(quantity(''0''))
+                        >= 0'
+                    - message: CPU limit must be non-negative
+                      rule: '!has(self.limits) || !(''cpu'' in self.limits) || quantity(string(self.limits[''cpu''])).compareTo(quantity(''0''))
+                        >= 0'
+                    - message: memory limit must be non-negative
+                      rule: '!has(self.limits) || !(''memory'' in self.limits) ||
+                        quantity(string(self.limits[''memory''])).compareTo(quantity(''0''))
+                        >= 0'
                     - message: CPU request must be less than or equal to CPU limit
                       rule: '!has(self.requests) || !has(self.limits) || !(''cpu''
                         in self.requests) || !(''cpu'' in self.limits) || quantity(string(self.requests[''cpu''])).compareTo(quantity(string(self.limits[''cpu''])))
@@ -104,6 +119,21 @@ spec:
                         type: object
                     type: object
                     x-kubernetes-validations:
+                    - message: CPU request must be non-negative
+                      rule: '!has(self.requests) || !(''cpu'' in self.requests) ||
+                        quantity(string(self.requests[''cpu''])).compareTo(quantity(''0''))
+                        >= 0'
+                    - message: memory request must be non-negative
+                      rule: '!has(self.requests) || !(''memory'' in self.requests)
+                        || quantity(string(self.requests[''memory''])).compareTo(quantity(''0''))
+                        >= 0'
+                    - message: CPU limit must be non-negative
+                      rule: '!has(self.limits) || !(''cpu'' in self.limits) || quantity(string(self.limits[''cpu''])).compareTo(quantity(''0''))
+                        >= 0'
+                    - message: memory limit must be non-negative
+                      rule: '!has(self.limits) || !(''memory'' in self.limits) ||
+                        quantity(string(self.limits[''memory''])).compareTo(quantity(''0''))
+                        >= 0'
                     - message: CPU request must be less than or equal to CPU limit
                       rule: '!has(self.requests) || !has(self.limits) || !(''cpu''
                         in self.requests) || !(''cpu'' in self.limits) || quantity(string(self.requests[''cpu''])).compareTo(quantity(string(self.limits[''cpu''])))
@@ -138,6 +168,21 @@ spec:
                         type: object
                     type: object
                     x-kubernetes-validations:
+                    - message: CPU request must be non-negative
+                      rule: '!has(self.requests) || !(''cpu'' in self.requests) ||
+                        quantity(string(self.requests[''cpu''])).compareTo(quantity(''0''))
+                        >= 0'
+                    - message: memory request must be non-negative
+                      rule: '!has(self.requests) || !(''memory'' in self.requests)
+                        || quantity(string(self.requests[''memory''])).compareTo(quantity(''0''))
+                        >= 0'
+                    - message: CPU limit must be non-negative
+                      rule: '!has(self.limits) || !(''cpu'' in self.limits) || quantity(string(self.limits[''cpu''])).compareTo(quantity(''0''))
+                        >= 0'
+                    - message: memory limit must be non-negative
+                      rule: '!has(self.limits) || !(''memory'' in self.limits) ||
+                        quantity(string(self.limits[''memory''])).compareTo(quantity(''0''))
+                        >= 0'
                     - message: CPU request must be less than or equal to CPU limit
                       rule: '!has(self.requests) || !has(self.limits) || !(''cpu''
                         in self.requests) || !(''cpu'' in self.limits) || quantity(string(self.requests[''cpu''])).compareTo(quantity(string(self.limits[''cpu''])))
